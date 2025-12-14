@@ -1,47 +1,47 @@
-class MedievalMessengerGame {
+class MensajeroMedieval {
     constructor() {
         this.canvas = document.getElementById("renderCanvas");
         this.engine = new BABYLON.Engine(this.canvas, true);
-        this.scene = null;
-        this.camera = null;
-        this.player = null;
-        this.scroll = null;
-        this.pickupZone = null;
-        this.deliveryZone = null;
+        this.escena = null;
+        this.camara = null;
+        this.jugador = null;
+        this.pergamino = null;
+        this.zonaRecoger = null;
+        this.zonaEntrega = null;
         
         // Estado del juego
-        this.hasScroll = false;
-        this.gameCompleted = false;
+        this.tienePergamino = false;
+        this.juegoCompletado = false;
         
         // Controles
-        this.keys = {};
+        this.teclas = {};
         
         // Referencias UI
-        this.statusElement = document.getElementById("status");
-        this.messageElement = document.getElementById("message");
+        this.elementoEstado = document.getElementById("status");
+        this.elementoMensaje = document.getElementById("message");
         
         // Referencias al modelo 3D
-        this.knightModel = null;
-        this.knightMeshes = null;
+        this.modeloCaballero = null;
+        this.meshesCaballero = null;
         
         this.init();
     }
     
     init() {
-        this.createScene();
-        this.createEnvironment();
-        this.createPlayer();
-        this.createScroll();
-        this.createZones();
-        this.setupControls();
-        this.setupCamera();
+        this.crearEscena();
+        this.crearEntorno();
+        this.crearJugador();
+        this.crearPergamino();
+        this.crearZonas();
+        this.setupControles();
+        this.setupCamara();
         
         // Game loop
         this.engine.runRenderLoop(() => {
-            if (!this.gameCompleted) {
+            if (!this.juegoCompletado) {
                 this.update();
             }
-            this.scene.render();
+            this.escena.render();
         });
         
         // Resize
@@ -50,42 +50,42 @@ class MedievalMessengerGame {
         });
     }
     
-    createScene() {
-        this.scene = new BABYLON.Scene(this.engine);
-        this.scene.clearColor = new BABYLON.Color3(0.53, 0.81, 0.92); // Cielo azul
+    crearEscena() {
+        this.escena = new BABYLON.Scene(this.engine);
+        this.escena.clearColor = new BABYLON.Color3(0.53, 0.81, 0.92); // Cielo azul
         
-        this.scene.fogMode = BABYLON.Scene.FOGMODE_NONE;
+        this.escena.fogMode = BABYLON.Scene.FOGMODE_NONE;
         
         // Luz hemisférica única y potente para iluminar toda la escena
-        const mainLight = new BABYLON.HemisphericLight(
+        const lizPrincipal = new BABYLON.HemisphericLight(
             "mainLight",
             new BABYLON.Vector3(0, 1, 0),
-            this.scene
+            this.escena
         );
-        mainLight.intensity = 1.2;
-        mainLight.diffuse = new BABYLON.Color3(1, 0.98, 0.95);
-        mainLight.groundColor = new BABYLON.Color3(0.6, 0.5, 0.4);
-        mainLight.specular = new BABYLON.Color3(0.3, 0.3, 0.3);
+        lizPrincipal.intensity = 1.2;
+        lizPrincipal.diffuse = new BABYLON.Color3(1, 0.98, 0.95);
+        lizPrincipal.groundColor = new BABYLON.Color3(0.6, 0.5, 0.4);
+        lizPrincipal.specular = new BABYLON.Color3(0.3, 0.3, 0.3);
         
         this.shadowGenerator = null;
     }
     
-    createEnvironment() {
-        const ground = BABYLON.MeshBuilder.CreateGround(
+    crearEntorno() {
+        const suelo = BABYLON.MeshBuilder.CreateGround(
             "ground",
             { width: 100, height: 100 },
-            this.scene
+            this.escena
         );
-        const groundMat = new BABYLON.StandardMaterial("groundMat", this.scene);
-        groundMat.diffuseColor = new BABYLON.Color3(0.4, 0.5, 0.3);
-        groundMat.specularColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+        const materialSuelo = new BABYLON.StandardMaterial("groundMat", this.escena);
+        materialSuelo.diffuseColor = new BABYLON.Color3(0.4, 0.5, 0.3);
+        materialSuelo.specularColor = new BABYLON.Color3(0.1, 0.1, 0.1);
         
-        const groundTexture = new BABYLON.DynamicTexture(
+        const texturaSuelo = new BABYLON.DynamicTexture(
             "groundTexture",
             512,
-            this.scene
+            this.escena
         );
-        const ctx = groundTexture.getContext();
+        const ctx = texturaSuelo.getContext();
         ctx.fillStyle = "#5a6b4f";
         ctx.fillRect(0, 0, 512, 512);
         
@@ -99,36 +99,36 @@ class MedievalMessengerGame {
                 5 + Math.random() * 10
             );
         }
-        groundTexture.update();
-        groundMat.diffuseTexture = groundTexture;
-        ground.material = groundMat;
-        ground.receiveShadows = true;
+        texturaSuelo.update();
+        materialSuelo.diffuseTexture = texturaSuelo;
+        suelo.material = materialSuelo;
+        suelo.receiveShadows = true;
         
-        this.createCastle(new BABYLON.Vector3(-30, 0, -30));
+        this.crearCastillo(new BABYLON.Vector3(-30, 0, -30));
         
-        this.createWizardTower(new BABYLON.Vector3(30, 0, 30));
+        this.crearTorreonMago(new BABYLON.Vector3(30, 0, 30));
         
-        this.createTrees();
+        this.crearArboles();
         
-        this.createPath();
+        this.crearCamino();
     }
     
-    createCastle(position) {
+    crearCastillo() {
         
         BABYLON.SceneLoader.ImportMesh(
             "",
             "models/castle/",
             "castle.glb",
-            this.scene,
+            this.escena,
             (meshes) => {
-                const castleRoot = meshes[0];
+                const castillo = meshes[0];
                 
-                if (castleRoot) {
-                    castleRoot.position = new BABYLON.Vector3(-28.5, 0, -28.5);
+                if (castillo) {
+                    castillo.position = new BABYLON.Vector3(-28.5, 0, -28.5);
                     
-                    castleRoot.scaling = new BABYLON.Vector3(650, 650, 650);
+                    castillo.scaling = new BABYLON.Vector3(650, 650, 650);
                     
-                    castleRoot.rotation = new BABYLON.Vector3(0, Math.PI / 4, 0);
+                    castillo.rotation = new BABYLON.Vector3(0, Math.PI / 4, 0);
                     
                     meshes.forEach(mesh => {
                         mesh.isVisible = true;
@@ -147,13 +147,13 @@ class MedievalMessengerGame {
         );
     }
     
-    createWizardTower(position) {
+    crearTorreonMago() {
         
         BABYLON.SceneLoader.ImportMesh(
             "",
             "models/tower/",
             "Towerr.gltf",
-            this.scene,
+            this.escena,
             (meshes) => {                
                 meshes.forEach((mesh, index) => {
                     mesh.position = new BABYLON.Vector3(1.65, -1.75, 0.77);
@@ -186,8 +186,8 @@ class MedievalMessengerGame {
         );
     }
     
-    createTrees() {
-        const treePositions = [
+    crearArboles() {
+        const posicionesArboles = [
             new BABYLON.Vector3(-40, 0, 10),
             new BABYLON.Vector3(-35, 0, 20),
             new BABYLON.Vector3(40, 0, -10),
@@ -198,61 +198,59 @@ class MedievalMessengerGame {
             new BABYLON.Vector3(-20, 0, 35)
         ];
         
-        treePositions.forEach((pos, index) => {
-            // Tronco
-            const trunk = BABYLON.MeshBuilder.CreateCylinder(
+        posicionesArboles.forEach((pos, index) => {
+            const tronco = BABYLON.MeshBuilder.CreateCylinder(
                 `trunk${index}`,
                 { height: 5, diameter: 1 },
-                this.scene
+                this.escena
             );
-            trunk.position = pos.add(new BABYLON.Vector3(0, 2.5, 0));
-            const trunkMat = new BABYLON.StandardMaterial(`trunkMat${index}`, this.scene);
-            trunkMat.diffuseColor = new BABYLON.Color3(0.3, 0.2, 0.1);
-            trunk.material = trunkMat;
+            tronco.position = pos.add(new BABYLON.Vector3(0, 2.5, 0));
+            const materialTronco = new BABYLON.StandardMaterial(`trunkMat${index}`, this.escena);
+            materialTronco.diffuseColor = new BABYLON.Color3(0.3, 0.2, 0.1);
+            tronco.material = materialTronco;
             
-            // Copa del árbol
-            const foliage = BABYLON.MeshBuilder.CreateSphere(
+            const copaArbol = BABYLON.MeshBuilder.CreateSphere(
                 `foliage${index}`,
                 { diameter: 6 },
-                this.scene
+                this.escena
             );
-            foliage.position = pos.add(new BABYLON.Vector3(0, 7, 0));
-            const foliageMat = new BABYLON.StandardMaterial(`foliageMat${index}`, this.scene);
-            foliageMat.diffuseColor = new BABYLON.Color3(0.2, 0.5, 0.2);
-            foliage.material = foliageMat;
+            copaArbol.position = pos.add(new BABYLON.Vector3(0, 7, 0));
+            const materialCopaArbol = new BABYLON.StandardMaterial(`foliageMat${index}`, this.escena);
+            materialCopaArbol.diffuseColor = new BABYLON.Color3(0.2, 0.5, 0.2);
+            copaArbol.material = materialCopaArbol;
         });
     }
     
-    createPath() {
+    crearCamino() {
         // Camino de piedras entre castillo y torreón
-        const pathMat = new BABYLON.StandardMaterial("pathMat", this.scene);
-        pathMat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.45);
+        const materialCamino = new BABYLON.StandardMaterial("pathMat", this.escena);
+        materialCamino.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.45);
         
         for (let i = -25; i <= 25; i += 5) {
-            const stone = BABYLON.MeshBuilder.CreateBox(
+            const piedra = BABYLON.MeshBuilder.CreateBox(
                 `pathStone${i}`,
                 { width: 4, height: 0.2, depth: 4 },
-                this.scene
+                this.escena
             );
-            stone.position = new BABYLON.Vector3(i, 0.1, i);
-            stone.rotation.y = Math.random() * 0.5;
-            stone.material = pathMat;
+            piedra.position = new BABYLON.Vector3(i, 0.1, i);
+            piedra.rotation.y = Math.random() * 0.5;
+            piedra.material = materialCamino;
         }
     }
     
-    createPlayer() {
-        const playerContainer = new BABYLON.TransformNode("playerContainer", this.scene);
-        playerContainer.position = new BABYLON.Vector3(-35, 0, 0);
+    crearJugador() {
+        const jugadorContainer = new BABYLON.TransformNode("playerContainer", this.escena);
+        jugadorContainer.position = new BABYLON.Vector3(-35, 0, 0);
         
-        this.player = playerContainer;
-        this.player.speed = 0.3;
-        this.player.rotationSpeed = 0.05;
+        this.jugador = jugadorContainer;
+        this.jugador.speed = 0.3;
+        this.jugador.rotationSpeed = 0.05;
         
         BABYLON.SceneLoader.ImportMesh(
             "",
             "models/knight/",
             "cavaleiro.gltf",
-            this.scene,
+            this.escena,
             (meshes) => {
                 const rootMesh = meshes[0];
                 
@@ -265,10 +263,10 @@ class MedievalMessengerGame {
                     
                     rootMesh.position = new BABYLON.Vector3(0, 0, 0);
                     
-                    rootMesh.parent = playerContainer;
+                    rootMesh.parent = jugadorContainer;
                     
-                    this.knightModel = rootMesh;
-                    this.knightMeshes = meshes;
+                    this.modeloCaballero = rootMesh;
+                    this.meshesCaballero = meshes;
                 }
             },
             (progress) => {
@@ -284,243 +282,241 @@ class MedievalMessengerGame {
         );
     }
     
-    createScroll() {
-        // Pergamino enrollado
-        const scroll = BABYLON.MeshBuilder.CreateCylinder(
+    crearPergamino() {
+        const pergamino = BABYLON.MeshBuilder.CreateCylinder(
             "scroll",
             { height: 0.8, diameter: 0.2 },
-            this.scene
+            this.escena
         );
-        scroll.rotation.z = Math.PI / 2;
-        scroll.position = new BABYLON.Vector3(-20, 1.5, -20);
+        pergamino.rotation.z = Math.PI / 2;
+        pergamino.position = new BABYLON.Vector3(-20, 1.5, -20);
         
-        const scrollMat = new BABYLON.StandardMaterial("scrollMat", this.scene);
-        scrollMat.diffuseColor = new BABYLON.Color3(0.9, 0.85, 0.7);
-        scrollMat.emissiveColor = new BABYLON.Color3(0.2, 0.18, 0.15);
-        scroll.material = scrollMat;
+        const materialPergamino = new BABYLON.StandardMaterial("scrollMat", this.escena);
+        materialPergamino.diffuseColor = new BABYLON.Color3(0.9, 0.85, 0.7);
+        materialPergamino.emissiveColor = new BABYLON.Color3(0.2, 0.18, 0.15);
+        pergamino.material = materialPergamino;
         
-        // Sello de cera rojo
-        const seal = BABYLON.MeshBuilder.CreateSphere(
+        const sello = BABYLON.MeshBuilder.CreateSphere(
             "seal",
             { diameter: 0.15 },
-            this.scene
+            this.escena
         );
-        seal.position = new BABYLON.Vector3(0, 0, 0);
-        seal.parent = scroll;
-        const sealMat = new BABYLON.StandardMaterial("sealMat", this.scene);
-        sealMat.diffuseColor = new BABYLON.Color3(0.8, 0.1, 0.1);
-        sealMat.emissiveColor = new BABYLON.Color3(0.3, 0, 0);
-        seal.material = sealMat;
+        sello.position = new BABYLON.Vector3(0, 0, 0);
+        sello.parent = pergamino;
+        const materialSello = new BABYLON.StandardMaterial("sealMat", this.escena);
+        materialSello.diffuseColor = new BABYLON.Color3(0.8, 0.1, 0.1);
+        materialSello.emissiveColor = new BABYLON.Color3(0.3, 0, 0);
+        sello.material = materialSello;
         
-        this.scroll = scroll;
-        this.scroll.initialPosition = scroll.position.clone();
+        this.pergamino = pergamino;
+        this.pergamino.initialPosition = pergamino.position.clone();
         
         // Animación de flotación
-        this.scene.registerBeforeRender(() => {
-            if (!this.hasScroll && this.scroll.parent === null) {
-                this.scroll.rotation.y += 0.02;
-                this.scroll.position.y = 1.5 + Math.sin(Date.now() * 0.003) * 0.2;
+        this.escena.registerBeforeRender(() => {
+            if (!this.tienePergamino && this.pergamino.parent === null) {
+                this.pergamino.rotation.y += 0.02;
+                this.pergamino.position.y = 1.5 + Math.sin(Date.now() * 0.003) * 0.2;
             }
         });
     }
     
-    createZones() {
+    crearZonas() {
         // Zona de recogida (castillo)
-        const pickupZone = BABYLON.MeshBuilder.CreateCylinder(
+        const zonaRecoger = BABYLON.MeshBuilder.CreateCylinder(
             "pickupZone",
             { height: 0.5, diameter: 5 },
-            this.scene
+            this.escena
         );
-        pickupZone.position = new BABYLON.Vector3(-20, 0.25, -20);
-        const pickupMat = new BABYLON.StandardMaterial("pickupMat", this.scene);
-        pickupMat.diffuseColor = new BABYLON.Color3(0.2, 0.8, 0.2);
-        pickupMat.alpha = 0.3;
-        pickupMat.emissiveColor = new BABYLON.Color3(0, 0.3, 0);
-        pickupZone.material = pickupMat;
-        this.pickupZone = pickupZone;
+        zonaRecoger.position = new BABYLON.Vector3(-20, 0.25, -20);
+        const materialZonaRecoger = new BABYLON.StandardMaterial("pickupMat", this.escena);
+        materialZonaRecoger.diffuseColor = new BABYLON.Color3(0.2, 0.8, 0.2);
+        materialZonaRecoger.alpha = 0.3;
+        materialZonaRecoger.emissiveColor = new BABYLON.Color3(0, 0.3, 0);
+        zonaRecoger.material = materialZonaRecoger;
+        this.zonaRecoger = zonaRecoger;
         
         // Zona de entrega (torreón)
-        const deliveryZone = BABYLON.MeshBuilder.CreateCylinder(
+        const zonaEntrega = BABYLON.MeshBuilder.CreateCylinder(
             "deliveryZone",
             { height: 0.5, diameter: 5 },
-            this.scene
+            this.escena
         );
-        deliveryZone.position = new BABYLON.Vector3(25, 0.25, 25);
-        const deliveryMat = new BABYLON.StandardMaterial("deliveryMat", this.scene);
-        deliveryMat.diffuseColor = new BABYLON.Color3(0.8, 0.2, 0.8);
-        deliveryMat.alpha = 0.3;
-        deliveryMat.emissiveColor = new BABYLON.Color3(0.3, 0, 0.3);
-        deliveryZone.material = deliveryMat;
-        this.deliveryZone = deliveryZone;
+        zonaEntrega.position = new BABYLON.Vector3(25, 0.25, 25);
+        const materialZonaEntrega = new BABYLON.StandardMaterial("deliveryMat", this.escena);
+        materialZonaEntrega.diffuseColor = new BABYLON.Color3(0.8, 0.2, 0.8);
+        materialZonaEntrega.alpha = 0.3;
+        materialZonaEntrega.emissiveColor = new BABYLON.Color3(0.3, 0, 0.3);
+        zonaEntrega.material = materialZonaEntrega;
+        this.zonaEntrega = zonaEntrega;
     }
     
-    setupCamera() {
+    setupCamara() {
         // Cámara que sigue al jugador
-        this.camera = new BABYLON.ArcRotateCamera(
+        this.camara = new BABYLON.ArcRotateCamera(
             "camera",
             Math.PI - 0.3,
             Math.PI / 2.5,
             15,
-            this.player.position,
-            this.scene
+            this.jugador.position,
+            this.escena
         );
-        this.camera.attachControl(this.canvas, true);
-        this.camera.lowerRadiusLimit = 8;
-        this.camera.upperRadiusLimit = 25;
-        this.camera.lowerBetaLimit = 0.1;
-        this.camera.upperBetaLimit = Math.PI / 2.2;
+        this.camara.attachControl(this.canvas, true);
+        this.camara.lowerRadiusLimit = 8;
+        this.camara.upperRadiusLimit = 25;
+        this.camara.lowerBetaLimit = 0.1;
+        this.camara.upperBetaLimit = Math.PI / 2.2;
         
         // Configurar sensibilidad del mouse
-        this.camera.angularSensibilityX = 1000;
-        this.camera.angularSensibilityY = 1000;
-        this.camera.panningSensibility = 0; // Desactivar paneo
+        this.camara.angularSensibilityX = 1000;
+        this.camara.angularSensibilityY = 1000;
+        this.camara.panningSensibility = 0; // Desactivar paneo
     }
     
-    setupControls() {
+    setupControles() {
         // Capturar teclas presionadas
         window.addEventListener("keydown", (e) => {
-            this.keys[e.key.toLowerCase()] = true;
+            this.teclas[e.key.toLowerCase()] = true;
             
             // Tecla E para recoger/entregar
             if (e.key.toLowerCase() === "e") {
-                this.handleInteraction();
+                this.verificarInteraccion();
             }
         });
         
         window.addEventListener("keyup", (e) => {
-            this.keys[e.key.toLowerCase()] = false;
+            this.teclas[e.key.toLowerCase()] = false;
         });
     }
     
     update() {
         // Movimiento del jugador relativo a la cámara
-        let moved = false;
+        let seMovio = false;
         
-        const cameraDirection = this.camera.target.subtract(this.camera.position);
-        cameraDirection.y = 0;
-        cameraDirection.normalize();
+        const direccionCamara = this.camara.target.subtract(this.camara.position);
+        direccionCamara.y = 0;
+        direccionCamara.normalize();
         
-        const right = BABYLON.Vector3.Cross(BABYLON.Axis.Y, cameraDirection);
-        right.normalize();
+        const derecha = BABYLON.Vector3.Cross(BABYLON.Axis.Y, direccionCamara);
+        derecha.normalize();
         
-        if (this.keys["w"] || this.keys["arrowup"]) {
-            this.player.position.addInPlace(cameraDirection.scale(this.player.speed));
-            moved = true;
+        if (this.teclas["w"] || this.teclas["arrowup"]) {
+            this.jugador.position.addInPlace(direccionCamara.scale(this.jugador.speed));
+            seMovio = true;
         }
-        if (this.keys["s"] || this.keys["arrowdown"]) {
-            this.player.position.addInPlace(cameraDirection.scale(-this.player.speed));
-            moved = true;
+        if (this.teclas["s"] || this.teclas["arrowdown"]) {
+            this.jugador.position.addInPlace(direccionCamara.scale(-this.jugador.speed));
+            seMovio = true;
         }
-        if (this.keys["a"] || this.keys["arrowleft"]) {
-            this.player.position.addInPlace(right.scale(-this.player.speed));
-            moved = true;
+        if (this.teclas["a"] || this.teclas["arrowleft"]) {
+            this.jugador.position.addInPlace(derecha.scale(-this.jugador.speed));
+            seMovio = true;
         }
-        if (this.keys["d"] || this.keys["arrowright"]) {
-            this.player.position.addInPlace(right.scale(this.player.speed));
-            moved = true;
+        if (this.teclas["d"] || this.teclas["arrowright"]) {
+            this.jugador.position.addInPlace(derecha.scale(this.jugador.speed));
+            seMovio = true;
         }
         
         // Rotar el jugador hacia la dirección de movimiento
-        if (moved) {
+        if (seMovio) {
             const moveDirection = new BABYLON.Vector3(0, 0, 0);
-            if (this.keys["w"] || this.keys["arrowup"]) {
-                moveDirection.addInPlace(cameraDirection.scale(-1));
+            if (this.teclas["w"] || this.teclas["arrowup"]) {
+                moveDirection.addInPlace(direccionCamara.scale(-1));
             }
-            if (this.keys["s"] || this.keys["arrowdown"]) {
-                moveDirection.addInPlace(cameraDirection);
+            if (this.teclas["s"] || this.teclas["arrowdown"]) {
+                moveDirection.addInPlace(direccionCamara);
             }
-            if (this.keys["a"] || this.keys["arrowleft"]) {
-                moveDirection.addInPlace(right);
+            if (this.teclas["a"] || this.teclas["arrowleft"]) {
+                moveDirection.addInPlace(derecha);
             }
-            if (this.keys["d"] || this.keys["arrowright"]) {
-                moveDirection.addInPlace(right.scale(-1));
+            if (this.teclas["d"] || this.teclas["arrowright"]) {
+                moveDirection.addInPlace(derecha.scale(-1));
             }
             
             if (moveDirection.length() > 0) {
                 moveDirection.normalize();
                 const targetRotation = Math.atan2(moveDirection.x, moveDirection.z);
-                this.player.rotation.y = targetRotation;
+                this.jugador.rotation.y = targetRotation;
             }
         }
         
         // Mantener jugador en el mapa
-        this.player.position.x = Math.max(-45, Math.min(45, this.player.position.x));
-        this.player.position.z = Math.max(-45, Math.min(45, this.player.position.z));
+        this.jugador.position.x = Math.max(-45, Math.min(45, this.jugador.position.x));
+        this.jugador.position.z = Math.max(-45, Math.min(45, this.jugador.position.z));
         
         // Actualizar posición de la cámara
-        this.camera.target = this.player.position;
+        this.camara.target = this.jugador.position;
         
         // Si el jugador tiene el pergamino, seguirlo
-        if (this.hasScroll && this.scroll.parent === this.player) {
-            this.scroll.position.y = 2;
+        if (this.tienePergamino && this.pergamino.parent === this.jugador) {
+            this.pergamino.position.y = 2;
         }
         
-        if (moved && this.knightModel) {
+        if (seMovio && this.modeloCaballero) {
             // Pequeño movimiento de rebote al caminar
-            this.knightModel.position.y = Math.abs(Math.sin(Date.now() * 0.01)) * 0.05;
-        } else if (this.knightModel) {
-            this.knightModel.position.y = 0;
+            this.modeloCaballero.position.y = Math.abs(Math.sin(Date.now() * 0.01)) * 0.05;
+        } else if (this.modeloCaballero) {
+            this.modeloCaballero.position.y = 0;
         }
     }
     
-    handleInteraction() {
-        if (this.gameCompleted) return;
+    verificarInteraccion() {
+        if (this.juegoCompletado) return;
         
-        const playerPos = this.player.position;
+        const posicionJugador = this.jugador.position;
         
         // Verificar si está en zona de recogida y no tiene pergamino
-        if (!this.hasScroll) {
-            const distToPickup = BABYLON.Vector3.Distance(
-                playerPos,
-                this.pickupZone.position
+        if (!this.tienePergamino) {
+            const distanciaParaRecoger = BABYLON.Vector3.Distance(
+                posicionJugador,
+                this.zonaRecoger.position
             );
             
-            if (distToPickup < 3) {
-                this.pickupScroll();
+            if (distanciaParaRecoger < 3) {
+                this.recogerPergamino();
             } else {
-                this.showMessage("❌ Debes estar en la zona verde del castillo");
+                this.mostrarMensaje("❌ Debes estar en la zona verde del castillo");
             }
         }
         // Verificar si está en zona de entrega y tiene pergamino
         else {
-            const distToDelivery = BABYLON.Vector3.Distance(
-                playerPos,
-                this.deliveryZone.position
+            const distanciaParaEntregar = BABYLON.Vector3.Distance(
+                posicionJugador,
+                this.zonaEntrega.position
             );
             
-            if (distToDelivery < 3) {
-                this.deliverScroll();
+            if (distanciaParaEntregar < 3) {
+                this.entregarPergamino();
             } else {
-                this.showMessage("❌ Debes llegar a la zona morada del torreón");
+                this.mostrarMensaje("❌ Debes llegar a la zona morada del torreón");
             }
         }
     }
     
-    pickupScroll() {
-        this.hasScroll = true;
+    recogerPergamino() {
+        this.tienePergamino = true;
         
         // Vincular pergamino al jugador
-        this.scroll.parent = this.player;
-        this.scroll.position = new BABYLON.Vector3(0.5, 0.8, 0);
-        this.scroll.rotation = new BABYLON.Vector3(0, 0, Math.PI / 4);
+        this.pergamino.parent = this.jugador;
+        this.pergamino.position = new BABYLON.Vector3(0.5, 0.8, 0);
+        this.pergamino.rotation = new BABYLON.Vector3(0, 0, Math.PI / 4);
         
-        this.showMessage("📜 ¡Pergamino recogido! Llévalo al Torreón del Mago");
-        this.updateStatus("Estado: Entrega el pergamino al Mago");
+        this.mostrarMensaje("📜 ¡Pergamino recogido! Llévalo al Torreón del Mago");
+        this.actualizarEstado("Estado: Entrega el pergamino al Mago");
     }
     
-    deliverScroll() {
-        this.hasScroll = false;
-        this.gameCompleted = true;
+    entregarPergamino() {
+        this.tienePergamino = false;
+        this.juegoCompletado = true;
         
         // Desvincular pergamino
-        this.scroll.parent = null;
-        this.scroll.position = this.deliveryZone.position.add(new BABYLON.Vector3(0, 2, 0));
+        this.pergamino.parent = null;
+        this.pergamino.position = this.zonaEntrega.position.add(new BABYLON.Vector3(0, 2, 0));
         
         // Efecto de entrega
-        this.scroll.scaling = new BABYLON.Vector3(2, 2, 2);
+        this.pergamino.scaling = new BABYLON.Vector3(2, 2, 2);
         
-        this.showMessage("¡Misión Completada! Has entregado el pergamino");
-        this.updateStatus("Estado: ¡Misión Cumplida!");
+        this.mostrarMensaje("¡Misión Completada! Has entregado el pergamino");
+        this.actualizarEstado("Estado: ¡Misión Cumplida!");
         
         // Mostrar pantalla de victoria
         setTimeout(() => {
@@ -528,26 +524,26 @@ class MedievalMessengerGame {
         }, 2000);
     }
     
-    showMessage(text) {
-        this.messageElement.textContent = text;
-        this.messageElement.classList.remove("show");
+    mostrarMensaje(texto) {
+        this.elementoMensaje.textContent = texto;
+        this.elementoMensaje.classList.remove("show");
         
         // Forzar reflow
-        void this.messageElement.offsetWidth;
+        void this.elementoMensaje.offsetWidth;
         
-        this.messageElement.classList.add("show");
+        this.elementoMensaje.classList.add("show");
         
         setTimeout(() => {
-            this.messageElement.classList.remove("show");
+            this.elementoMensaje.classList.remove("show");
         }, 3000);
     }
     
-    updateStatus(text) {
-        this.statusElement.textContent = text;
+    actualizarEstado(texto) {
+        this.elementoEstado.textContent = texto;
     }
 }
 
 // Iniciar el juego cuando la página cargue
 window.addEventListener("DOMContentLoaded", () => {
-    new MedievalMessengerGame();
+    new MensajeroMedieval();
 });
