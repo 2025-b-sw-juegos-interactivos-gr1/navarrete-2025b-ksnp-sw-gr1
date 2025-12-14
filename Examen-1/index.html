@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajero Medieval - Babylon.js</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="renderCanvas"></canvas>
+        
+        <!-- HUD del juego -->
+        <div id="hud">
+            <div id="instructions">
+                <div style="display: flex; justify-content: center;">
+                    <div style="font-weight: bold; font-size:large;">🏰 Mensajero Medieval 🧙‍♂️</div>
+                </div>
+                <br>
+                <strong>Misión:</strong> Lleva el pergamino del Castillo del Rey al Torreón del Mago
+                <br><br>
+                <strong>Controles:</strong><br>
+                • WASD / Flechas: Mover<br>
+                • E: Recoger/Entregar pergamino<br>
+                • Mouse: Rotar cámara
+            </div>
+            <div id="status">Estado: Busca el pergamino en el castillo</div>
+            <div id="message"></div>
+        </div>
+
+        <!-- Pantalla de victoria -->
+        <div id="victoryScreen" style="display: none;">
+            <div id="victoryContent">
+                <h1>¡Misión Completada!</h1>
+                <p>Has entregado el pergamino real al Mago con éxito.</p>
+                <p>El reino está a salvo gracias a tu valentía.</p>
+                <button onclick="location.reload()">Jugar de Nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
