@@ -718,22 +718,35 @@ chatarra valiosa y venderla.
 No hay gobiernos aquí - solo pilotos solitarios buscando ganarse la vida.
 ```
 
-Ejemplo:
-"Neo-Tokyo, año 2087. Las corporaciones controlan todo mediante IA.
-La humanidad está dividida entre 'aumentados' (con implantes cibernéticos)
-y 'puros' (humanos sin modificar). El jugador es un mercenario entre ambos mundos."
-```
-
 #### 4.1.2 Conflicto Principal
 
 **¿Cuál es el problema que impulsa la historia?**
 ```
-[DESCRIBE EL CONFLICTO CENTRAL]
+El Sector 7G de la Zona de Cascara es un territorio en disputa. 
+Tres mega-corporaciones (OmniTech, Helix Dynamics, y Novus Industries) 
+compiten agresivamente por controlar los derechos de salvamento.
+
+Recientemente, las corporaciones comenzaron a sembrar la zona con 
+"RECLAMADORES" - drones automatizados que destruyen naves de salvagers 
+independientes para monopolizar los recursos. Los asteroides y restos 
+de combate son lo único que mantiene a las corporaciones fuera... por ahora.
+
+Los salvagers independientes como tú tienen días contados. Cada run 
+podría ser el último antes de que lleguen los drones corporativos.
 ```
 
 **Antagonista/Fuerza Opositora:**
 ```
-[DESCRIBE AL ANTAGONISTA O FUERZA OPOSITORA]
+ANTAGONISTA PRINCIPAL: El Entorno Hostil del Espacio
+
+No hay un villano tradicional. Los verdaderos enemigos son:
+- Los asteroides y restos de combate (peligro físico)
+- El tiempo limitado (presión temporal)
+- El vacío del espacio (aislamiento)
+- Las corporaciones (amenaza de fondo, no presente directamente)
+
+La tensión viene de la supervivencia contra las probabilidades, 
+no de un enemigo con rostro.
 ```
 
 ### 4.2 Personajes
@@ -742,69 +755,168 @@ y 'puros' (humanos sin modificar). El jugador es un mercenario entre ambos mundo
 
 | Aspecto | Descripción |
 |---------|-------------|
-| **Nombre** | [Nombre del personaje jugable] |
-| **Edad/Origen** | [Background básico] |
-| **Motivación** | [¿Por qué actúa?] |
-| **Habilidad Única** | [Qué lo hace especial] |
-| **Arco Narrativo** | [Cómo cambia en la historia] |
+| **Nombre** | "El Piloto" (sin nombre específico - es el jugador) |
+| **Edad/Origen** | Salvager independiente, piloto de la nave VALKYRIE-7. Edad desconocida. Veterano de múltiples runs en zonas peligrosas. |
+| **Motivación** | Supervivencia económica. Cada tonelada de chatarra = créditos para combustible, reparaciones, y comida. No hay glamour - solo necesidad. |
+| **Habilidad Única** | Reflejos excepcionales y conocimiento intuitivo de patrones de asteroides. Puede "leer" el campo de escombros mejor que la mayoría. |
+| **Arco Narrativo** | No hay arco tradicional (juego arcade). Cada partida es una "historia" independiente de supervivencia. El jugador crea su propia narrativa. |
+
+**Diseño de Personaje (Implícito):**
+- No vemos al piloto físicamente (cámara cenital externa)
+- Su personalidad se expresa a través del pilotaje (agresivo vs cauteloso)
+- Es uno de los últimos salvagers independientes que quedan
 
 #### 4.2.2 Personajes Secundarios
 
-**Aliado/NPC 1:**
-- Nombre: [Nombre]
-- Rol: [Mentor, Comerciante, Compañero]
-- Relación con el protagonista: [Describe]
+> **Nota:** Astro Salvager es un juego arcade sin NPCs ni diálogos. Los "personajes" son implícitos a través de Environmental Storytelling.
 
-**Antagonista/Boss:**
-- Nombre:
-- Motivación:
-- Relación con el protagonista:
+**"VOZ DE CONTROL" (Solo en pantalla de título - opcional):**
+- Nombre: "Estación Cascara - Control de Tráfico"
+- Rol: Voz mecánica que autoriza el acceso al Sector 7G
+- Relación con el protagonista: Burocrática, indiferente
+- Presencia: Solo texto en pantalla de inicio: "Sector 7G cleared for salvage. 120 seconds. Good luck, Pilot."
+
+**"LOS ANTERIORES PILOTOS" (Implícito):**
+- Nombre: Múltiples salvagers que intentaron antes
+- Presencia: Los restos metálicos que recolectas son de sus naves destruidas
+- Relación: No los conociste, pero estás siguiendo sus pasos
+- Narrativa ambiental: Cada pieza de chatarra tiene una historia silenciosa
+
+**"LAS CORPORACIONES" (Antagonistas ausentes):**
+- Nombres: OmniTech, Helix Dynamics, Novus Industries
+- Motivación: Monopolizar recursos espaciales, eliminar competencia independiente
+- Relación con el protagonista: Enemigos indirectos - no aparecen en el juego, pero su amenaza está implícita
+- Presencia: Logos corporativos en algunas piezas de chatarra (Easter eggs visuales)
 
 ### 4.3 Historia / Estructura Narrativa
 
-#### 4.3.1 Actos (Estructura en 3 Actos)
+#### 4.3.1 Estructura Narrativa de Astro Salvager
 
-**ACTO 1 - Introducción (Setup)**
-- **Duración:** [X% del juego o X horas]
-- **Eventos clave:**
-  - [Incidente incitador]
-  - [Presentación del mundo]
-  - [Primer objetivo]
+> **Nota Importante:** Astro Salvager no tiene estructura narrativa de 3 actos tradicional. En su lugar, usa **Narrativa Ambiental Minimalista** y **Storytelling por Mecánicas**.
 
-**ACTO 2 - Desarrollo (Confrontation)**
-- **Duración:** [X% del juego]
-- **Eventos clave:**
-  - [Escalada de conflicto]
-  - [Punto medio - revelación]
-  - [Momento más oscuro]
+**ENFOQUE NARRATIVO: Micro-Historia por Partida**
 
-**ACTO 3 - Resolución (Resolution)**
-- **Duración:** [X% del juego]
-- **Eventos clave:**
-  - [Confrontación final]
-  - [Resolución del conflicto]
-  - [Epílogo]
+Cada run de 120 segundos es una historia completa en sí misma:
+
+**INICIO (0-30 segundos) - "La Calma"**
+- **Momento:** El piloto entra al Sector 7G
+- **Estado emocional:** Confianza, preparación
+- **Narrativa implícita:** "Puedo hacerlo. Solo 2 minutos."
+- **Presentación del mundo:** Campo de asteroides, restos de naves, silencio espacial
+
+**DESARROLLO (30-90 segundos) - "La Prueba"**
+- **Escalada:** La densidad de objetos aumenta, decisiones se vuelven críticas
+- **Estado emocional:** Tensión creciente, concentración máxima
+- **Punto de inflexión:** El jugador activa un combo x1.5 o comete un error casi fatal
+- **Narrativa implícita:** "Puedo llegar más lejos esta vez. Solo un poco más..."
+
+**CLÍMAX (90-120 segundos) - "La Supervivencia"**
+- **Confrontación final:** Máxima densidad de obstáculos, reflejos al límite
+- **Estado emocional:** Adrenalina pura, flow state o pánico controlado
+- **Narrativa implícita:** "No puedo morir ahora. Solo 10 segundos más."
+
+**RESOLUCIÓN (Game Over) - "El Legado"**
+- **Desenlace:** Colisión con asteroide O tiempo agotado
+- **Cierre:** Pantalla de puntaje - "Final Score: 3,450"
+- **Epílogo:** High score guardado - tu nombre (o puntaje) permanece
+- **Narrativa implícita:** "La próxima vez llegaré más lejos."
+
+**Estructura Cíclica:**
+```
+Run 1 → Game Over → "Retry" → Run 2 → Game Over → "Retry" → Run 3...
+
+Cada run es una micro-historia de supervivencia.
+El jugador construye su propia narrativa a través de intentos repetidos.
+```
 
 #### 4.3.2 Integración Narrativa con Gameplay
 
-¿Cómo se cuenta la historia?
+¿Cómo se cuenta la historia en Astro Salvager?
 
-- [ ] Cinemáticas/Cutscenes
-- [ ] Diálogos in-game
-- [ ] Environmental Storytelling (narrativa ambiental)
-- [ ] Collectibles/Logs (audio logs, diarios)
-- [ ] Eventos scripteados durante gameplay
+- [✓] **Environmental Storytelling (narrativa ambiental)** ← PRINCIPAL
+  - Los restos de naves destruidas cuentan historias silenciosas
+  - Logos corporativos en chatarra implican el conflicto de fondo
+  - El campo de asteroides mismo es un "cementerio" de la guerra
+  
+- [✓] **Mecánicas como Narrativa**
+  - El temporizador de 120s representa "tiempo de seguridad" antes de que lleguen drones
+  - La inercia de la nave representa la dificultad de pilotar en gravedad cero
+  - Los multiplicadores de zona representan "riesgo vs recompensa" de la vida del salvager
+  
+- [✓] **Texto Minimalista en Pantalla de Título**
+  - Línea única: "Sector 7G cleared for salvage. 120 seconds. Good luck, Pilot."
+  - Establece contexto sin interrumpir el gameplay
+  
+- [✗] **Cinemáticas/Cutscenes** - No hay. Interrumpirían el flujo arcade.
+  
+- [✗] **Diálogos in-game** - No hay. El piloto está solo en el vacío.
+  
+- [✗] **Collectibles/Logs** - No hay coleccionables narrativos. Solo chatarra para puntos.
+  
+- [✗] **Eventos scripteados** - No. Todo el gameplay es emergente y procedural.
+
+**Filosofía Narrativa:**
+```
+"Show, don't tell" llevado al extremo.
+No necesitamos explicar la historia con texto.
+El jugador la entiende jugando.
+```
 
 ### 4.4 Temática y Tono
 
 **Temas principales:**
-- [Tema #1] - Ejemplo: "Identidad y tecnología"
-- [Tema #2] - Ejemplo: "El costo del progreso"
-- [Tema #3]
+
+1. **"Supervivencia contra las Probabilidades"**
+   - El piloto está solo contra un universo hostil
+   - No hay narrativa épica de "salvar el mundo" - solo sobrevivir el próximo minuto
+   - Conexión con estética "Challenge" del MDA
+
+2. **"El Valor del Riesgo Calculado"**
+   - ¿Vale la pena arriesgar tu vida por 50 puntos más?
+   - Refleja la vida de un salvager: cada decisión puede ser la última
+   - Conexión con mecánicas de zona peligrosa
+
+3. **"Soledad y Autosuficiencia"**
+   - No hay compañeros, no hay rescate
+   - Solo tú, tu nave, y el vacío
+   - El high score es tu único legado
+
+4. **"Nostalgia Arcade"**
+   - Honrar juegos clásicos como Asteroids (1979)
+   - "Un turno más" - la adicción de superar tu propio récord
+   - Conexión con estética visual synthwave/retro
 
 **Tono general:**
-- [Serio, Cómico, Melancólico, Esperanzador, etc.]
-- Referencias tonales: [Película/Libro/Juego similar]
+
+- **Tonos presentes:**
+  - 🚀 **Arcade Puro:** Sin pretensiones narrativas pesadas, directo al gameplay
+  - 🎮 **Retro-Nostálgico:** Evoca la era dorada de los arcades de los 80s
+  - 🌌 **Soledad Espacial:** Atmósfera de aislamiento, pero no deprimente
+  - ⚡ **Tensión Creciente:** De tranquilo a frenético en 2 minutos
+  - 🎯 **Competitivo Pero Justo:** El juego no hace trampa - si mueres, fue tu error
+
+- **Tonos ausentes:**
+  - ❌ No es épico ni grandioso (no estás salvando galaxias)
+  - ❌ No es cómico ni satírico
+  - ❌ No es oscuro ni grimdark (no hay gore ni horror)
+  - ❌ No es melodramático ni emocional
+
+**Referencias tonales:**
+
+| Referencia | Qué Tomamos | Qué Evitamos |
+|------------|-------------|--------------|
+| **Asteroids (1979)** | Pureza arcade, sin historia explícita | Gráficos vectoriales antiguos |
+| **Geometry Wars** | Tensión creciente, flow state, neon aesthetic | Complejidad de armas |
+| **Drive (2011 film)** | Atmósfera synthwave, soledad cool, protagonista silencioso | Violencia gráfica |
+| **Firefly/Serenity** | Salvagers espaciales independientes, atmósfera de frontera | Diálogos extensos, tripulación |
+| **FTL: Faster Than Light** | Tensión de supervivencia espacial, runs independientes | Complejidad de sistemas |
+
+**Elevator Pitch del Tono:**
+```
+"Asteroids (1979) reimaginado para 2026 con estética synthwave.
+Pura tensión arcade sin historia que interrumpa el gameplay.
+Tú contra el vacío - 120 segundos para demostrar que vales."
+```
 
 ---
 
@@ -1199,7 +1311,7 @@ porque:
 **Patrón elegido:** **Component-Based Architecture** (inspirado en Unity)
 
 **Justificación:**
-```
+
 Component-Based es ideal para Astro Salvager porque:
 
 1. SIMPLICIDAD: Solo tenemos 4 tipos de entidades (Nave, Chatarra, Asteroides, UI)
@@ -1210,7 +1322,7 @@ Component-Based es ideal para Astro Salvager porque:
 No usamos ECS puro porque:
 - El juego tiene <50 entidades simultáneas (no necesitamos optimización extrema)
 - La complejidad extra de ECS no justifica el beneficio en un arcade simple
-```
+
 
 #### 7.2.2 Diagrama de Arquitectura de Alto Nivel
 
@@ -1241,7 +1353,7 @@ No usamos ECS puro porque:
 │                  BABYLON.JS ENGINE LAYER                    │
 │  [Scene] [Meshes] [Materials] [Cameras] [Lights]          │
 └─────────────────────────────────────────────────────────────┘
-```
+
 ├─────────────────────────────────────────┤
 │         ENTITY/COMPONENT LAYER          │
 │  ┌────────┐ ┌────────┐ ┌────────┐     │
@@ -1255,7 +1367,6 @@ No usamos ECS puro porque:
 │  └────────┘ └────────┘ └────────┘     │
 └─────────────────────────────────────────┘
 
-[CREA TU DIAGRAMA]
 ```
 
 ### 7.3 Patrones de Diseño Aplicados
@@ -1362,11 +1473,6 @@ No usamos ECS puro porque:
 └──────────────────────┘
 ```
 
-[CREA TU DIAGRAMA COMPLETO]
-```
-
-**Nota:** Usar herramientas como PlantUML o Draw.io para diagramas profesionales.
-
 #### 7.4.2 Diagrama de Casos de Uso
 
 ```
@@ -1436,29 +1542,7 @@ No usamos ECS puro porque:
 
 ## 8. Apéndices
 
-### 8.1 Glosario de Términos
-
-| Término | Definición |
-|---------|------------|
-| Core Loop | Ciclo de acciones que el jugador repite constantemente |
-| FSM | Finite State Machine - Máquina de estados finitos |
-| Proc-gen | Procedural Generation - Generación procedural |
-| [Otro] | [Definición] |
-
-### 8.2 Referencias y Bibliografía
-
-#### 8.2.1 Juegos Analizados
-
-1. **[Nombre del Juego 1]**
-   - Desarrollador: [Nombre]
-   - Año: [Año]
-   - Qué analizamos: [Mecánica/Sistema específico]
-   - Lecciones aprendidas: [Qué tomamos/evitamos]
-
-2. **[Nombre del Juego 2]**
-   - [Completar...]
-
-#### 8.2.2 Teoría de Diseño Aplicada
+#### 8.1 Teoría de Diseño Aplicada
 
 - **MDA Framework:** Hunicke, R., LeBlanc, M., Zubek, R. (2004). "MDA: A Formal Approach to Game Design and Game Research"
   - **Aplicación:** Usado como núcleo del diseño de Astro Salvager (Sección 2 completa)
@@ -1469,27 +1553,12 @@ No usamos ECS puro porque:
 - **Flow Theory:** Csikszentmihalyi, M. (1990) - "Flow: The Psychology of Optimal Experience"
   - **Aplicación:** Curva de dificultad para mantener flow state
 
-#### 8.2.3 Recursos Técnicos
-
-- **Babylon.js Documentation:** https://doc.babylonjs.com/
-- **TypeScript Handbook:** https://www.typescriptlang.org/docs/
-- **PlantUML para UML:** https://plantuml.com/
-- **Vite Build Tool:** https://vitejs.dev/
-
-### 8.3 Control de Versiones del Documento
+### 8.2 Control de Versiones del Documento
 
 | Versión | Fecha | Cambios | Autor |
 |---------|-------|---------|-------|
 | 0.1 | 01/02/2026 | Plantilla inicial del proyecto | Equipo |
 | 1.0 | 01/02/2026 | **GDD completo para Astro Salvager** - Análisis MDA, mecánicas detalladas, arquitectura | Equipo |
-
-### 8.4 Contribuidores
-
-- **Diseño de Juego y MDA:** Equipo de desarrollo
-- **Arquitectura Técnica:** Equipo de desarrollo
-- **Narrativa Ambiental:** Equipo de desarrollo
-- **Level Design (Arena):** Equipo de desarrollo
-- **Dirección de Arte:** Equipo de desarrollo
 
 ---
 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Salvager - Vertical Slice</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #0A0E27;
+      font-family: 'Rajdhani', 'Arial', sans-serif;
+      color: #FFFFFF;
+    }
+
+    #renderCanvas {
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      display: block;
+    }
+
+    /* HUD Container */
+    #hud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #score {
+      font-size: 32px;
+      color: #00FFFF;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+      font-weight: 700;
+    }
+
+    #timer {
+      font-size: 48px;
+      color: #FFFFFF;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      font-weight: 700;
+    }
+
+    #timer.warning {
+      color: #FF6600;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    /* Game Over / Victory Screen */
+    #gameOverScreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 14, 39, 0.95);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    #gameOverScreen.show {
+      display: flex;
+    }
+
+    #gameOverTitle {
+      font-size: 64px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+    }
+
+    #finalScore {
+      font-size: 36px;
+      color: #00FFFF;
+      margin-bottom: 40px;
+    }
+
+    #restartButton {
+      padding: 15px 40px;
+      font-size: 24px;
+      background: transparent;
+      border: 2px solid #00FFFF;
+      color: #00FFFF;
+      cursor: pointer;
+      transition: all 0.3s;
+      pointer-events: all;
+    }
+
+    #restartButton:hover {
+      background: #00FFFF;
+      color: #0A0E27;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+      transform: scale(1.05);
+    }
+
+    /* Instructions */
+    #instructions {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #CCCCCC;
+      font-size: 18px;
+      z-index: 10;
+    }
+
+    /* Loading */
+    #loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #00FFFF;
+      z-index: 200;
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas para renderizado 3D -->
+  <canvas id="renderCanvas"></canvas>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div id="score">SCORE: 0</div>
+    <div id="timer">120</div>
+  </div>
+
+  <!-- Instrucciones -->
+  <div id="instructions">
+    WASD: Mover | ESC: Pausa | Objetivo: Recolecta las piezas de chatarra (ovnis) sin chocar
+  </div>
+
+  <!-- Pantalla de Game Over / Victoria -->
+  <div id="gameOverScreen">
+    <h1 id="gameOverTitle">GAME OVER</h1>
+    <p id="finalScore">FINAL SCORE: 0</p>
+    <button id="restartButton">REINICIAR (R)</button>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading">Cargando...</div>
+
+  <!-- Script principal -->
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

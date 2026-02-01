@@ -380,7 +380,7 @@ class PlayerShip extends GameObject {
 │           ▼                      ▼                         │
 │  ┌──────────────┐      ┌──────────────┐                  │
 │  │ SceneManager │      │ ScoreManager │                  │
-│  │ (Arena única)│      │ (Puntos+combo│                  │
+│  │ (Arena única)│      │(Puntos+combo)│                  │
 │  └──────────────┘      └──────────────┘                  │
 └──────────────────────────┬────────────────────────────────┘
                            │

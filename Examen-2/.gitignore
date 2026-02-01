@@ -1,0 +1,56 @@
+# Sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+~$*
+
+# Archivos de Office temporales
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Archivos grandes (opcional - descomentar si trabajas con assets grandes)
+# *.psd
+# *.ai
+# *.mp4
+# *.mov
+
+# Build artifacts (si decides implementar después)
+node_modules/
+dist/
+build/
+.cache/
+*.tgz
+
+# Configuración local
+.env
+.env.local
+config.local.json
+
+# Archivos de trabajo en progreso
+WIP/
+draft/
+borrador/

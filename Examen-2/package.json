@@ -1,0 +1,19 @@
+{
+  "name": "astro-salvager-vertical-slice",
+  "version": "0.1.0",
+  "description": "Vertical Slice de Astro Salvager - Score Attack Espacial 3D",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^6.48.1",
+    "@babylonjs/loaders": "^6.48.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
+  }
+}
